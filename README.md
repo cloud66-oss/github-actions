@@ -1,9 +1,9 @@
 # GitHub Actions for Cloud 66 toolbelt #
-This repository contains GitHub Actions for [Cloud 66 toolbelt](https://github.com/cloud66-oss/cx), which would allow users to perform common tasks available through cx (such as deployment), using GitHub Actions.
+This repository contains GitHub Actions for [Cloud 66 Toolbelt](https://github.com/cloud66-oss/cx), which would allow users to perform common tasks available through cx (such as deployment), using GitHub Actions.
 
 # Usage #
 
-Below have been provided two example workflows, which demonstrate the two ways in which Cloud 66 toolbelt commands can be passed to the Cloud 66 GitHub Action. Both result in redeployment of a Cloud 66 stack, named "my_stack".
+Below have been provided two example workflows, which demonstrate the two ways in which Cloud 66 Toolbelt commands can be passed to the Cloud 66 GitHub Action. Both result in redeployment of a Cloud 66 stack, named "my_stack".
 
 The first option is to provide the name of the stack as an environment variable and to pass the cx command as an argument, containing the name of the environment variable, as can be seen below:
 
