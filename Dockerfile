@@ -1,6 +1,6 @@
 FROM cloud66/cx:latest
 
-LABEL "com.github.actions.name"="Cloud 66 GitHub Action"
+LABEL "com.github.actions.name"="Cloud 66 Toolbelt"
 LABEL "com.github.actions.description"="GitHub Action that allows you to perform Cloud 66 Toolbelt operations when envoked."
 LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="green"
