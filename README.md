@@ -1,3 +1,5 @@
+<img src="http://cdn2-cloud66-com.s3.amazonaws.com/images/oss-sponsorship.png" width=150/>
+
 # GitHub Actions for Cloud 66 Toolbelt #
 This repository contains GitHub Actions for [Cloud 66 Toolbelt](https://github.com/cloud66-oss/cx), which would allow users to perform common tasks available through cx (such as deployment), using GitHub Actions.
 
