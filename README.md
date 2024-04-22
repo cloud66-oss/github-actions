@@ -1,45 +1,52 @@
 <img src="http://cdn2-cloud66-com.s3.amazonaws.com/images/oss-sponsorship.png" width=150/>
 
 # GitHub Actions for Cloud 66 Toolbelt #
-This repository contains GitHub Actions for [Cloud 66 Toolbelt](https://github.com/cloud66-oss/cx), which would allow users to perform common tasks available through cx (such as deployment), using GitHub Actions.
+This repository contains GitHub Actions for [Cloud 66 Toolbelt](https://help.cloud66.com/docs/toolbelt/toolbelt), which would allow users to perform common tasks available through cx (such as deployment), using GitHub Actions.
 
 # Usage #
 
-Below have been provided two example workflows, which demonstrate the two ways in which Cloud 66 Toolbelt commands can be passed to the Cloud 66 GitHub Action. Both result in redeployment of a Cloud 66 stack, named "my_stack".
+Two example workflows have been provided below demonstrating two ways in which Cloud 66 Toolbelt commands can be passed to the Cloud 66 GitHub Action. Both of these example workflows result in a redeployment of a Cloud 66 stack, named "my_stack".
 
-The first option is to provide the name of the stack as an environment variable and to pass the cx command as an argument, containing the name of the environment variable, as can be seen below:
+The first example provides the name of the stack as an environment variable. This environment variable is then passed to the toolbelt command. 
+
+## Example 1 ##
 
 ```
-workflow "New workflow" {
-  on = "push"
-  resolves = ["cloud66"]
-}
-
-action "cloud66" {
-  uses = "./.cloud66/cx"
-  secrets = ["CLOUD66_TOKEN"]
-  args = "redeploy --stack CLOUD66_STACK -y --listen"
-  env = {
-    CLOUD66_STACK = "my-stack"
-  }
-}
+name: Cloud66Action
+on: push
+env:
+  CLOUD66_TOKEN: ${{ secrets.SECRETS }}
+  CLOUD66_STACK: "my_stack"
+jobs:
+  test-job:
+    name: Test Job
+    runs-on: ubuntu-latest
+    container:
+      image: cloud66/cx:latest
+    steps:
+      - run: cx redeploy --stack CLOUD66_STACK -y --listen
 ```
-The second option is to pass the cx command and the name of the stack together as an argument. This would look like this:
-```
-workflow "New workflow" {
-  on = "push"
-  resolves = ["cloud66"]
-}
+The second example passes the name of the stack directly to the toolbelt command.
 
-action "cloud66" {
-  uses = "./.cloud66/cx"
-  args = "redeploy --stack my-stack -y --listen"
-  secrets = ["CLOUD66_TOKEN"]
-}
+## Example 2 ##
+
+```
+name: Cloud66Action
+on: push
+env:
+  CLOUD66_TOKEN: ${{ secrets.SECRETS }}
+jobs:
+  test-job:
+    name: Test Job
+    runs-on: ubuntu-latest
+    container:
+      image: cloud66/cx:latest
+    steps:
+      - run: cx redeploy --stack my_stack -y --listen
 ```
 
 ## Secrets ##
-Both options would need the content of the cx token file to be passed as a secret. This would enable cx. The content can be accessed by running the ```cx dump-token | base64``` command on your local device. The result can then be used as a value of a secret with key ```CLOUD66_TOKEN```. Note that the name of the secret cannot be anything else, since cx will not recognise it.
+Both options would need the content of the cx token file to be passed as a secret to authenticate an account with the toolbelt. The content can be accessed by running the ```cx dump-token | base64``` command on your local device that is already authenticated to a Cloud 66 account. The result can then be used as a value of a secret with key ```CLOUD66_TOKEN```. Note that the name of the secret must be ```CLOUD66_TOKEN```. For help adding the secret to your Github, please see [this](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) help page.
 
 ## Environment Variables ##
 The use of environment variables is a matter of personal choice, since anything that is passed as an environment variable, can also be directly provided in the arguments part. 
