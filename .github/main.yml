@@ -2,7 +2,7 @@
 name: Cloud66Action
 # This determines what action will cause the job to trigger
 on: push
-# The CLOUD66_TOKEN is required and other env variables may be added.
+# The CLOUD66_TOKEN is required and other env variables may be added
 env:
   CLOUD66_TOKEN: ${{ secrets.SECRETS }}
 # Contains the configuration of which Github runner type and image to use to perform the jobs.
@@ -14,4 +14,4 @@ jobs:
       image: cloud66/cx:latest
 # This step will perform the cx command. In this example the redeploy command is used, but other toolbelt commands may be run.
     steps:
-      - run: cx redeploy --stack dh_test_git -y --listen
+      - run: cx redeploy --stack my-stack-name -y --listen
